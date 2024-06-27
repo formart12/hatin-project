@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hatin/src/viewmodel/app_view_model.dart';
-import 'package:hatin/src/view/home_view.dart';
+import 'package:hatin/src/app/app_view_model.dart';
+import 'package:hatin/src/app/ui/home_view.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
