@@ -24,7 +24,7 @@ jobs:
         id: flutter-action
         with:
           channel: stable
-          dry-run: true
+      - run: flutter --version
 
       - name: Install dependencies
         run: flutter pub get
