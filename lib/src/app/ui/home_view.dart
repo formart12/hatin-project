@@ -78,13 +78,17 @@ class _TabBarScreenState extends State<HomeView>
         ),
         Card(
           child: ListTile(
-            title: Text("루틴2"),
+            title: Text(
+              "루틴2",
+            ),
             trailing: Icon(Icons.ac_unit),
           ),
         ),
         Card(
           child: ListTile(
-            title: Text("루틴3"),
+            title: Text(
+              "루틴3",
+            ),
             trailing: Icon(Icons.ac_unit),
           ),
         ),
