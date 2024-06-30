@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hatin/src/ui/plus_routin_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -39,7 +38,6 @@ class _TabBarScreenState extends State<HomeView>
           ],
         ),
       ),
-      bottomSheet: const PlusRoutinView(),
     );
   }
 
