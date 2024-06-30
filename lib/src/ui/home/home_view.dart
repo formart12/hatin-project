@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hatin/src/ui/routine/routine_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,6 +11,7 @@ class HomeView extends StatefulWidget {
 class _TabBarScreenState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   final _tabs = <Tab>[
+    // 요일 선택
     const Tab(
       child: Text(
         "일",
@@ -31,6 +33,7 @@ class _TabBarScreenState extends State<HomeView>
 
   @override
   void initState() {
+    // 탭바를 사용하려면 initState 가 필요함.
     super.initState();
     _tabController = TabController(
       length: _tabs.length,
@@ -55,28 +58,15 @@ class _TabBarScreenState extends State<HomeView>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          Container(
-            color: Colors.red,
-          ),
-          Container(
-            color: Colors.blue,
-          ),
-          Container(
-            color: Colors.red,
-          ),
-          Container(
-            color: Colors.blue,
-          ),
-          Container(
-            color: Colors.red,
-          ),
-          Container(
-            color: Colors.blue,
-          ),
-          Container(
-            color: Colors.red,
-          ),
+        children: const [
+          // 루틴 UI 부분
+          RoutineView(),
+          RoutineView(),
+          RoutineView(),
+          RoutineView(),
+          RoutineView(),
+          RoutineView(),
+          RoutineView(),
         ],
       ),
     );
