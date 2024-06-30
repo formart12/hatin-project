@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hatin/src/app/ui/plus_routin_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -38,6 +39,7 @@ class _TabBarScreenState extends State<HomeView>
           ],
         ),
       ),
+      bottomSheet: const PlusRoutinView(),
     );
   }
 
@@ -88,6 +90,22 @@ class _TabBarScreenState extends State<HomeView>
           child: ListTile(
             title: Text(
               "루틴3",
+            ),
+            trailing: Icon(Icons.ac_unit),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              "루틴4",
+            ),
+            trailing: Icon(Icons.ac_unit),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              "루틴5",
             ),
             trailing: Icon(Icons.ac_unit),
           ),
