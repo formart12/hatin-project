@@ -10,15 +10,39 @@ class HomeView extends StatefulWidget {
 
 class _TabBarScreenState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  late TabController tabController = TabController(
-    length: 7,
-    vsync: this,
-    initialIndex: 0,
-  );
+  final _tabs = <Tab>[
+    const Tab(
+      child: Text(
+        "일",
+        style: TextStyle(color: Colors.red),
+      ),
+    ),
+    const Tab(text: "월"),
+    const Tab(text: "화"),
+    const Tab(text: "수"),
+    const Tab(text: "목"),
+    const Tab(text: "금"),
+    const Tab(
+        child: Text(
+      "토",
+      style: TextStyle(color: Colors.red),
+    )),
+  ];
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: _tabs.length,
+      vsync: this,
+      initialIndex: 0,
+    );
+  }
 
   @override
   void dispose() {
-    tabController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -27,17 +51,34 @@ class _TabBarScreenState extends State<HomeView>
     return Scaffold(
       appBar: AppBar(
         title: const Text("나의 루틴"),
+        bottom: PreferredSize(
+            preferredSize: AppBar().preferredSize, child: _tabBar()),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _tabBar(),
-            _myroutin(),
-            SafeArea(
-              child: _logo(),
-            ),
-          ],
-        ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Container(
+            color: Colors.red,
+          ),
+          Container(
+            color: Colors.blue,
+          ),
+          Container(
+            color: Colors.red,
+          ),
+          Container(
+            color: Colors.blue,
+          ),
+          Container(
+            color: Colors.red,
+          ),
+          Container(
+            color: Colors.blue,
+          ),
+          Container(
+            color: Colors.red,
+          ),
+        ],
       ),
       bottomSheet: const PlusRoutinView(),
     );
@@ -45,80 +86,8 @@ class _TabBarScreenState extends State<HomeView>
 
   Widget _tabBar() {
     return TabBar(
-      controller: tabController,
-      tabs: const [
-        Tab(
-          child: Text(
-            "일",
-            style: TextStyle(color: Colors.red),
-          ),
-        ),
-        Tab(text: "월"),
-        Tab(text: "화"),
-        Tab(text: "수"),
-        Tab(text: "목"),
-        Tab(text: "금"),
-        Tab(
-            child: Text(
-          "토",
-          style: TextStyle(color: Colors.red),
-        )),
-      ],
-    );
-  }
-
-  Widget _myroutin() {
-    return const Column(
-      children: [
-        Card(
-          child: ListTile(
-            title: Text(
-              "루틴1",
-            ),
-            trailing: Icon(Icons.ac_unit),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              "루틴2",
-            ),
-            trailing: Icon(Icons.ac_unit),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              "루틴3",
-            ),
-            trailing: Icon(Icons.ac_unit),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              "루틴4",
-            ),
-            trailing: Icon(Icons.ac_unit),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              "루틴5",
-            ),
-            trailing: Icon(Icons.ac_unit),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _logo() {
-    return Container(
-      width: 300,
-      height: 300,
-      color: Colors.blue,
+      controller: _tabController,
+      tabs: _tabs,
     );
   }
 }
