@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hatin/src/app/app.dart';
-import 'package:hatin/src/app/app_view_model.dart';
+import 'package:hatin/src/ui/app/app.dart';
+import 'package:hatin/src/ui/app/app_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {

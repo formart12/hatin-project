@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hatin/src/app/ui/plus_routin_view.dart';
+import 'package:hatin/src/ui/plus_routin_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
