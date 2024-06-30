@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hatin/src/ui/app/app_view_model.dart';
-import 'package:hatin/src/home/home_view.dart';
+import 'package:hatin/src/ui/home/home_view.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         builder: (context, provider, child) => IndexedStack(
           index: provider.pageIndex,
           children: [
-            const HomeView(),
+            const HomeView(), // 홈 UI
             Container(
               color: Colors.yellow,
             ),
