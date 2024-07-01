@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hatin/src/ui/routine/routin_add.dart';
 
 class RoutineView extends StatefulWidget {
   const RoutineView({super.key});
