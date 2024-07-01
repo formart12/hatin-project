@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hatin/src/home/home_view.dart';
+import 'package:hatin/src/ui/home/home_view.dart';
 
 Widget creatHomeViewWidget() => const MaterialApp(
       home: HomeView(),
@@ -11,6 +13,7 @@ void main() {
       await widgetTester.pumpWidget(creatHomeViewWidget());
 
       expect(find.byType(TabBar), findsOneWidget);
+      expect((find.byType(TabBarView)), findsOneWidget);
     });
   });
 }
