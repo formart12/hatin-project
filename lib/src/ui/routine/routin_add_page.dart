@@ -85,6 +85,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
         ),
         _routinMemoText(),
         _routinMemoTyping(),
+        _routinCreateButton(),
       ],
     );
   }
@@ -291,6 +292,23 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
           decoration: InputDecoration(
               border: OutlineInputBorder(), hintText: "메모를 입력하세요"),
         ),
+      ),
+    );
+  }
+
+  Widget _routinCreateButton() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+            onPressed: () {
+              print("클릭");
+            },
+            child: const Text(
+              "루틴 생성",
+            )),
       ),
     );
   }

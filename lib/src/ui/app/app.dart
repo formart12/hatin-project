@@ -16,6 +16,7 @@ class _AppState extends State<App> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: _body(),
+      bottomNavigationBar: _bottomNavigationBar(),
     );
   }
 
