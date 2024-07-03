@@ -21,7 +21,7 @@ class _RoutineViewState extends State<RoutineView> {
               _listedit(),
             ],
           ),
-          _plusroutin(),
+          _body(),
           _checkroutine(),
         ]),
       ),
@@ -38,19 +38,6 @@ class _RoutineViewState extends State<RoutineView> {
     return TextButton(
       onPressed: () {},
       child: const Text("전체 편집"),
-    );
-  }
-
-  Widget _plusroutin() {
-    // 루틴이 보이고 옆에 아이콘을 누르면 루틴 추가 가능.
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          height: 300,
-          color: Colors.blue[900],
-        )
-      ],
     );
   }
 

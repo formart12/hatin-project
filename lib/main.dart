@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AppViewModel(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => const App(),
           "/routinAddPage": (context) => const RoutinAddPage(),
