@@ -45,7 +45,11 @@ class _RoutineViewState extends State<RoutineView> {
     // 루틴이 보이고 옆에 아이콘을 누르면 루틴 추가 가능.
     return Column(
       children: [
-        _body(),
+        Container(
+          width: double.infinity,
+          height: 300,
+          color: Colors.blue[900],
+        )
       ],
     );
   }
@@ -82,8 +86,8 @@ class _RoutineViewState extends State<RoutineView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
                     child: Text(
                       "루틴 추가하기",
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
@@ -107,10 +111,10 @@ class _RoutineViewState extends State<RoutineView> {
         child: Container(
           width: 50,
           height: 50,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 170, 168, 168),
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 170, 168, 168),
               shape: BoxShape.circle),
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.black,
           ),

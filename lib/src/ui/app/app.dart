@@ -40,19 +40,27 @@ class _AppState extends State<App> {
 
   Widget _bottomNavigationBar() =>
       Consumer<AppViewModel>(builder: (context, provider, child) {
-        return BottomNavigationBar(
-            currentIndex: provider.pageIndex,
-            onTap: provider.changeIndex,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.grey,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Rotin"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Feed"),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "MyPage"),
-            ]);
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(30),
+            topLeft: Radius.circular(30),
+          ),
+          child: BottomNavigationBar(
+              backgroundColor: Colors.orange,
+              currentIndex: provider.pageIndex,
+              onTap: provider.changeIndex,
+              selectedItemColor: Colors.black,
+              unselectedItemColor: Colors.grey,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              type: BottomNavigationBarType.fixed,
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Rotin"),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Feed"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: "MyPage"),
+              ]),
+        );
       });
 }
