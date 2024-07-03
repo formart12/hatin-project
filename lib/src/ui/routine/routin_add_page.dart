@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -26,7 +24,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 // 앱 바 부분
   PreferredSizeWidget _appbar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(100),
+      preferredSize: const Size.fromHeight(100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -35,7 +33,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
             centerTitle: true,
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
-            title: Text(
+            title: const Text(
               "루틴 추가하기",
               style: TextStyle(fontSize: 20),
             ),
@@ -51,7 +49,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: IconButton(
-        icon: Icon(Icons.close),
+        icon: const Icon(Icons.close),
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -76,6 +74,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
         _routinStartDayTime(), // 루틴 시작일 아래
         _routinRepeatText(), // 루틴 반복
         _routinRepeatSelection(), // 루틴 반복 요일 선택
+
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,14 +91,14 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |이름 입력| 텍스트
   Widget _nameText() {
-    String _routinName = "이름 입력";
+    String routinName = "이름 입력";
     return Padding(
       padding: const EdgeInsets.only(left: 13.0, top: 30.0),
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, top: 30.0),
         child: Text(
-          _routinName,
-          style: TextStyle(fontSize: 30.0),
+          routinName,
+          style: const TextStyle(fontSize: 30.0),
         ),
       ),
     );
@@ -113,15 +112,15 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
         onTap: () {
           print("icons.edit이 눌려졌다!");
         },
-        child: Icon(Icons.edit),
+        child: const Icon(Icons.edit),
       ),
     );
   }
 
 // |루틴 시간| 텍스트
   Widget _routinTimeText() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, top: 30.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 30.0, top: 30.0),
       child: Text(
         "루틴 시간",
         style: TextStyle(fontSize: 20.0),
@@ -131,7 +130,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |루틴 시간| 아래 오전 시간 박스
   Widget _routinTimeAdd() {
-    TimeOfDay _initialTime = TimeOfDay(hour: 9, minute: 0);
+    TimeOfDay initialTime = const TimeOfDay(hour: 9, minute: 0);
     return Padding(
       padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
       child: TextField(
@@ -139,17 +138,17 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
         decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-            hintText: "${_initialTime.hour}, ${_initialTime.minute}"),
+            hintText: "${initialTime.hour}, ${initialTime.minute}"),
         onTap: () async {
           final TimeOfDay? timeOfDay = await showTimePicker(
             context: context,
-            initialTime: _initialTime,
+            initialTime: initialTime,
           );
           if (timeOfDay != null) {
             setState(() {
-              _initialTime = timeOfDay;
+              initialTime = timeOfDay;
             });
-            print("${_initialTime}");
+            print("$initialTime");
           }
         },
       ),
@@ -158,8 +157,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 //|루틴 시작일| 텍스트
   Widget _routinStartDayText() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, top: 15.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 30.0, top: 15.0),
       child: Text(
         "루틴 시작일",
         style: TextStyle(fontSize: 20.0),
@@ -197,8 +196,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |루틴 반복| 텍스트
   Widget _routinRepeatText() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, top: 15.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 30.0, top: 15.0),
       child: Text(
         "루틴 반복",
         style: TextStyle(fontSize: 20.0),
@@ -240,8 +239,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |알람| 텍스트
   Widget _routinAlarmText() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, top: 15.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 30.0, top: 15.0),
       child: Text(
         "알림",
         style: TextStyle(fontSize: 20.0),
@@ -251,16 +250,16 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
   // |알람| On/OFF
   Widget _routinAlarmAction() {
-    bool _switchValue = true;
+    bool switchValue = true;
     return Padding(
       padding: const EdgeInsets.only(left: 200.0, top: 15),
       child: Transform.scale(
         scale: 1.3,
         child: CupertinoSwitch(
-            value: _switchValue,
+            value: switchValue,
             onChanged: (value) {
               setState(() {
-                _switchValue = value;
+                switchValue = value;
               });
             }),
       ),
@@ -269,8 +268,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |메모| 텍스트
   Widget _routinMemoText() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30.0, top: 25.0),
+    return const Padding(
+      padding: EdgeInsets.only(left: 30.0, top: 25.0),
       child: Text(
         "메모",
         style: TextStyle(fontSize: 20.0),
@@ -284,9 +283,9 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Padding(
+      child: const Padding(
         //
-        padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+        padding: EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
         child: TextField(
           maxLines: null,
           decoration: InputDecoration(
