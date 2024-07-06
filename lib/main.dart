@@ -17,6 +17,17 @@ class MyApp extends StatelessWidget {
       create: (context) => AppViewModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            useMaterial3: false,
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            scaffoldBackgroundColor: const Color(0xffe9e9e9),
+            appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.white, foregroundColor: Colors.black),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+                backgroundColor: Colors.white,
+                unselectedItemColor: Color(0xffd9d9d9),
+                selectedItemColor: Color(0xffFE4F28))),
         routes: {
           "/": (context) => const App(),
           "/routinAddPage": (context) => const RoutinAddPage(),

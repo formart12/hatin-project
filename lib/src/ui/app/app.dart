@@ -17,6 +17,7 @@ class _AppState extends State<App> {
       backgroundColor: Colors.white,
       body: _body(),
       bottomNavigationBar: _bottomNavigationBar(),
+      extendBody: true,
     );
   }
 
@@ -46,11 +47,9 @@ class _AppState extends State<App> {
             topLeft: Radius.circular(30),
           ),
           child: BottomNavigationBar(
-              backgroundColor: Colors.orange,
+              backgroundColor: Colors.white,
               currentIndex: provider.pageIndex,
               onTap: provider.changeIndex,
-              selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.grey,
               showSelectedLabels: false,
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:hatin/src/ui/routine/routine_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -10,24 +11,16 @@ class HomeView extends StatefulWidget {
 
 class _TabBarScreenState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  final _tabs = <Tab>[
-    // 요일 선택
-    const Tab(
-      child: Text(
-        "일",
-        style: TextStyle(color: Colors.red),
-      ),
-    ),
-    const Tab(text: "월"),
-    const Tab(text: "화"),
-    const Tab(text: "수"),
-    const Tab(text: "목"),
-    const Tab(text: "금"),
-    const Tab(
-        child: Text(
-      "토",
-      style: TextStyle(color: Colors.red),
-    )),
+  var now = DateTime.now();
+  late final startOfWeek;
+  final _weekDay = [
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "토",
+    "일",
   ];
   late final TabController _tabController;
 
@@ -36,10 +29,11 @@ class _TabBarScreenState extends State<HomeView>
     // 탭바를 사용하려면 initState 가 필요함.
     super.initState();
     _tabController = TabController(
-      length: _tabs.length,
+      length: _weekDay.length,
       vsync: this,
-      initialIndex: 0,
+      initialIndex: now.weekday - 1,
     );
+    startOfWeek = now.day - (now.weekday - 1);
   }
 
   @override
@@ -51,31 +45,69 @@ class _TabBarScreenState extends State<HomeView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("나의 루틴"),
-        bottom: PreferredSize(
-            preferredSize: AppBar().preferredSize, child: _tabBar()),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          // 루틴 UI 부분
-          RoutineView(),
-          RoutineView(),
-          RoutineView(),
-          RoutineView(),
-          RoutineView(),
-          RoutineView(),
-          RoutineView(),
-        ],
-      ),
-    );
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize * 2,
+          child: Container(
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 0,
+                blurRadius: 20, // Increased blur radius
+                offset: const Offset(0, 4),
+              )
+            ]),
+            child: AppBar(
+              elevation: 0.0,
+              shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(24.0))),
+              centerTitle: false,
+              title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
+              bottom: PreferredSize(
+                  preferredSize: AppBar().preferredSize, child: _tabBar()),
+            ),
+          ),
+        ),
+        body: TabBarView(
+            controller: _tabController,
+            children: List.generate(7, (index) => const RoutineView())));
   }
 
   Widget _tabBar() {
-    return TabBar(
-      controller: _tabController,
-      tabs: _tabs,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: TabBar(
+        controller: _tabController,
+        indicator: const BoxDecoration(color: Color(0xffFFE3D7)),
+        labelStyle:
+            const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+        tabs: List.generate(
+            _weekDay.length,
+            (index) => Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          _weekDay[index],
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          (startOfWeek + index).toString(),
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                        ),
+                      )
+                    ],
+                  ),
+                )),
+      ),
     );
   }
 }
