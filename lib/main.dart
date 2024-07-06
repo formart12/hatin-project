@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: false,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            scaffoldBackgroundColor: const Color(0xffe9e9e9),
+            scaffoldBackgroundColor: const Color(0xffefefef),
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white, foregroundColor: Colors.black),
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
