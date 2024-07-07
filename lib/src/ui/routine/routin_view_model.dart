@@ -6,7 +6,11 @@ class RoutinViewModel extends ChangeNotifier {
   final RoutinService routinService;
   final List<Routin> _dailyRoutins = [];
 
+  bool _isEdit = false;
+
   List<Routin> get routins => _dailyRoutins;
+
+  bool get isEdit => _isEdit;
 
   RoutinViewModel({required this.routinService}) {
     _fetchData();
@@ -16,6 +20,11 @@ class RoutinViewModel extends ChangeNotifier {
     final routins = await routinService.getAllRoutins();
     _dailyRoutins.clear();
     _dailyRoutins.addAll(routins);
+    notifyListeners();
+  }
+
+  void edit() {
+    _isEdit = !_isEdit;
     notifyListeners();
   }
 }

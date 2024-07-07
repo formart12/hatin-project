@@ -1,9 +1,11 @@
 import 'dart:ui';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hatin/src/ui/routine/routin_page.dart';
+import 'package:hatin/src/ui/routine/routin_view_model.dart';
 import 'package:intl/intl.dart';
-import 'package:hatin/src/ui/routine/routine_view.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -48,15 +50,23 @@ class _TabBarScreenState extends State<HomeView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize * 2,
+      appBar: _appBar(),
+      body: _body(),
+      extendBodyBehindAppBar: true,
+    );
+  }
+
+  PreferredSize _appBar() => PreferredSize(
+        preferredSize: (Provider.of<RoutinViewModel>(context).isEdit)
+            ? (AppBar().preferredSize * 3)
+            : (AppBar().preferredSize * 2),
         child: ClipRRect(
           borderRadius:
               const BorderRadius.vertical(bottom: Radius.circular(32.0)),
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 4.0,
-              sigmaY: 4.0,
+              sigmaX: 15.0,
+              sigmaY: 15.0,
             ),
             child: Container(
               decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
@@ -75,55 +85,86 @@ class _TabBarScreenState extends State<HomeView>
                         BorderRadius.vertical(bottom: Radius.circular(32.0))),
                 centerTitle: false,
                 title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
-                bottom: PreferredSize(
-                    preferredSize: AppBar().preferredSize, child: _tabBar()),
+                bottom: _tabBar(),
               ),
             ),
           ),
         ),
+      );
+
+  PreferredSize _tabBar() {
+    return PreferredSize(
+      preferredSize: AppBar().preferredSize,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              indicator: const BoxDecoration(color: Color(0xffFFC6B9)),
+              labelStyle: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w600),
+              tabs: List.generate(
+                  _weekDay.length,
+                  (index) => Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 12.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                _weekDay[index],
+                                style: const TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Text(
+                                (startOfWeek + index).toString(),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400),
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
+            ),
+            _edit()
+          ],
+        ),
       ),
-      body: TabBarView(
-          controller: _tabController,
-          children: List.generate(7, (index) => const RoutineView())),
-      extendBodyBehindAppBar: true,
     );
   }
 
-  Widget _tabBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: TabBar(
-        controller: _tabController,
-        indicator: const BoxDecoration(color: Color(0xffFFC6B9)),
-        labelStyle:
-            const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-        tabs: List.generate(
-            _weekDay.length,
-            (index) => Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 12.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Text(
-                          _weekDay[index],
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w400),
-                        ),
+  Widget _edit() =>
+      Consumer<RoutinViewModel>(builder: (context, provder, child) {
+        return (provder.isEdit)
+            ? SizedBox(
+                height: AppBar().preferredSize.height,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Row(
+                        children: [Text("선택"), Text("전체선택")],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Text(
-                          (startOfWeek + index).toString(),
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
-      ),
-    );
-  }
+                    ),
+                    GestureDetector(
+                        onTap: Provider.of<RoutinViewModel>(context).edit,
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("취소"),
+                        ))
+                  ],
+                ),
+              )
+            : Container();
+      });
+
+  Widget _body() => TabBarView(
+      controller: _tabController,
+      children: List.generate(7, (index) => const RoutinPage()));
 }
