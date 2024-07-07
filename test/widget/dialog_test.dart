@@ -8,7 +8,7 @@ void main() {
       Widget createHatinDialog() => MaterialApp(
             home: Scaffold(
               body: HatinDialog(
-                content: "content",
+                content: const ["content"],
                 onCancel: () {},
                 onCommit: () {},
               ),
@@ -22,7 +22,7 @@ void main() {
         (widgetTester) async {
       builder() => HatinDialog(
             showHeader: true,
-            content: "content",
+            content: const ["content"],
             onCancel: () {},
             onCommit: () {},
           );
@@ -32,14 +32,14 @@ void main() {
 
     testWidgets("확인, 취소 액션을 할당하지 않은 경우 assert가 실행된다..", (widgetTester) async {
       builderA() => HatinDialog(
-            content: "content",
+            content: const ["content"],
           );
       builderB() => HatinDialog(
-            content: "content",
+            content: const ["content"],
             onCancel: () {},
           );
       builderC() => HatinDialog(
-            content: "content",
+            content: const ["content"],
             onCommit: () {},
           );
 
@@ -53,7 +53,7 @@ void main() {
       Widget createHatinDialog() => MaterialApp(
             home: Scaffold(
               body: HatinDialog(
-                content: "content",
+                content: const ["content"],
                 onCancel: () {
                   log.add("Cancel");
                 },
@@ -76,7 +76,7 @@ void main() {
       Widget createHatinDialog() => MaterialApp(
             home: Scaffold(
               body: HatinDialog(
-                content: "content",
+                content: const ["content"],
                 onCancel: () {},
                 cancelLabel: "취소변경",
                 onCommit: () {},

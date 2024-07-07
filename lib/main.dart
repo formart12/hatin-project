@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hatin/src/repository/routin_repository.dart';
+import 'package:hatin/src/service/routin_service.dart';
 import 'package:hatin/src/ui/app/app.dart';
 import 'package:hatin/src/ui/app/app_view_model.dart';
 import 'package:hatin/src/ui/routine/routin_add_page.dart';
+import 'package:hatin/src/ui/routine/routin_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -13,14 +16,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AppViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AppViewModel()),
+        ChangeNotifierProvider(
+            create: (context) => RoutinViewModel(
+                routinService:
+                    RoutinService(routinRepository: RoutinRepository())))
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             useMaterial3: false,
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
+            colorScheme: const ColorScheme.light(
+                primary: Color(0xffFE4F28), secondary: Color(0x00f1f3f5)),
             scaffoldBackgroundColor: const Color(0xffefefef),
             appBarTheme: const AppBarTheme(
                 backgroundColor: Colors.white,

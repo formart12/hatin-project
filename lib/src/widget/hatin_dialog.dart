@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HatinDialog extends StatelessWidget {
   final Widget? header;
   final bool showHeader;
-  final String content;
+  final List<String> content;
   final String commitLabel;
   final void Function()? onCommit;
   final String cancelLabel;
@@ -23,41 +23,37 @@ class HatinDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _header(),
-          _content(),
-          _commitBtn(),
-          _cancelBtn(),
-        ],
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      child: Container(
+        height: 300,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _header(),
+            _content(),
+            _commitBtn(),
+            _cancelBtn(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _header() => (header != null) ? header! : Container();
+  Widget _header() => (header != null)
+      ? Padding(padding: const EdgeInsets.all(20.0), child: header!)
+      : Container();
 
-  Widget _content() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-        child: Center(
-            child: Text(
-          content,
-          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-        )),
-      );
-
-  Widget _commitBtn() => InkWell(
-        onTap: onCommit,
+  Widget _content() => Expanded(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                commitLabel,
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              content.length,
+              (index) => Text(
+                content[index],
                 style:
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
@@ -66,17 +62,46 @@ class HatinDialog extends StatelessWidget {
         ),
       );
 
+  Widget _commitBtn() => InkWell(
+        highlightColor: const Color(0xffFFE3D7),
+        onTap: onCommit,
+        child: Ink(
+          width: double.infinity,
+          decoration: const BoxDecoration(color: Color(0xffFE4F28)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                commitLabel,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      );
+
   Widget _cancelBtn() => InkWell(
+        highlightColor: Colors.white.withOpacity(0.8),
+        borderRadius:
+            const BorderRadius.vertical(bottom: Radius.circular(32.0)),
         onTap: onCancel,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: SizedBox(
-            width: double.infinity,
+        child: Ink(
+          decoration: const BoxDecoration(
+              borderRadius:
+                  BorderRadius.vertical(bottom: Radius.circular(32.0))),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Center(
               child: Text(
                 cancelLabel,
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff111111)),
               ),
             ),
           ),

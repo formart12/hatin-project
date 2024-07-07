@@ -30,25 +30,31 @@ class _RoutineViewState extends State<RoutineView> {
     );
   }
 
-  Widget _header() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              "오늘 하루루틴",
-              style: TextStyle(
-                fontSize: 14,
-              ),
+  Widget _header() => SizedBox(
+        height: AppBar().preferredSize.height,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "오늘 하루루틴",
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+                TextButton(
+                  onPressed:
+                      Provider.of<RoutinViewModel>(context, listen: false).edit,
+                  child: const Text(
+                    "전체 편집",
+                    style: TextStyle(color: Color(0xffa8a8a8)),
+                  ),
+                )
+              ],
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                "전체 편집",
-                style: TextStyle(color: Color(0xffa8a8a8)),
-              ),
-            )
-          ],
+          ),
         ),
       );
 
@@ -115,7 +121,6 @@ class _RoutineViewState extends State<RoutineView> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             routin.name,
