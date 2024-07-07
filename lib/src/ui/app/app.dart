@@ -49,6 +49,7 @@ class _AppState extends State<App> {
                   topLeft: Radius.circular(50),
                 ),
                 child: BottomNavigationBar(
+                    key: const Key("AppBottomNav"),
                     backgroundColor: Colors.white,
                     currentIndex: provider.pageIndex,
                     onTap: provider.changeIndex,
@@ -68,6 +69,7 @@ class _AppState extends State<App> {
               );
             })
           : GestureDetector(
+              key: const Key("RoutinDelBtn"),
               onTap: () {
                 Provider.of<RoutinViewModel>(context, listen: false)
                     .showDeleteDialog(context);

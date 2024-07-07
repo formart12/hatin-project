@@ -43,8 +43,9 @@ class _RoutineViewState extends State<RoutineView> {
                     fontSize: 14,
                   ),
                 ),
-                TextButton(
-                  onPressed:
+                GestureDetector(
+                  key: const Key("전체 편집"),
+                  onTap:
                       Provider.of<RoutinViewModel>(context, listen: false).edit,
                   child: const Text(
                     "전체 편집",
