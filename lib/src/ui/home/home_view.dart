@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:hatin/src/ui/routine/routine_view.dart';
@@ -45,32 +48,45 @@ class _TabBarScreenState extends State<HomeView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize * 2,
-          child: Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 0,
-                blurRadius: 20, // Increased blur radius
-                offset: const Offset(0, 4),
-              )
-            ]),
-            child: AppBar(
-              elevation: 0.0,
-              shape: const RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(24.0))),
-              centerTitle: false,
-              title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
-              bottom: PreferredSize(
-                  preferredSize: AppBar().preferredSize, child: _tabBar()),
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize * 2,
+        child: ClipRRect(
+          borderRadius:
+              const BorderRadius.vertical(bottom: Radius.circular(32.0)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 4.0,
+              sigmaY: 4.0,
+            ),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    spreadRadius: 0,
+                    blurRadius: 20,
+                    offset: const Offset(0, 4),
+                    blurStyle: BlurStyle.normal)
+              ]),
+              child: AppBar(
+                elevation: 0.0,
+                backgroundColor: Colors.white.withOpacity(0.75),
+                shape: const RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(32.0))),
+                centerTitle: false,
+                title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
+                bottom: PreferredSize(
+                    preferredSize: AppBar().preferredSize, child: _tabBar()),
+              ),
             ),
           ),
         ),
-        body: TabBarView(
-            controller: _tabController,
-            children: List.generate(7, (index) => const RoutineView())));
+      ),
+      body: TabBarView(
+          controller: _tabController,
+          children: List.generate(7, (index) => const RoutineView())),
+      extendBodyBehindAppBar: true,
+    );
   }
 
   Widget _tabBar() {
@@ -78,7 +94,7 @@ class _TabBarScreenState extends State<HomeView>
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TabBar(
         controller: _tabController,
-        indicator: const BoxDecoration(color: Color(0xffFFE3D7)),
+        indicator: const BoxDecoration(color: Color(0xffFFC6B9)),
         labelStyle:
             const TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         tabs: List.generate(
@@ -93,7 +109,7 @@ class _TabBarScreenState extends State<HomeView>
                         child: Text(
                           _weekDay[index],
                           style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w600),
+                              fontSize: 12, fontWeight: FontWeight.w400),
                         ),
                       ),
                       Padding(
@@ -101,7 +117,7 @@ class _TabBarScreenState extends State<HomeView>
                         child: Text(
                           (startOfWeek + index).toString(),
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w400),
+                              fontSize: 18, fontWeight: FontWeight.w400),
                         ),
                       )
                     ],

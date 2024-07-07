@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hatin/src/ui/app/app_view_model.dart';
+import 'package:hatin/src/ui/home/home_page.dart';
 import 'package:hatin/src/ui/home/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,7 @@ class _AppState extends State<App> {
         builder: (context, provider, child) => IndexedStack(
           index: provider.pageIndex,
           children: [
-            const HomeView(), // 홈 UI
+            const HomePage(),
             Container(
               color: Colors.yellow,
             ),
@@ -43,8 +44,8 @@ class _AppState extends State<App> {
       Consumer<AppViewModel>(builder: (context, provider, child) {
         return ClipRRect(
           borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(30),
-            topLeft: Radius.circular(30),
+            topRight: Radius.circular(50),
+            topLeft: Radius.circular(50),
           ),
           child: BottomNavigationBar(
               backgroundColor: Colors.white,
