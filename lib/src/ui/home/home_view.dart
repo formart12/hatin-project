@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hatin/src/ui/routine/routin_page.dart';
 import 'package:hatin/src/ui/routine/routin_view_model.dart';
@@ -68,25 +71,15 @@ class _TabBarScreenState extends State<HomeView>
               sigmaX: 15.0,
               sigmaY: 15.0,
             ),
-            child: Container(
-              decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 0,
-                    blurRadius: 20,
-                    offset: const Offset(0, 4),
-                    blurStyle: BlurStyle.normal)
-              ]),
-              child: AppBar(
-                elevation: 0.0,
-                backgroundColor: Colors.white.withOpacity(0.75),
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(32.0))),
-                centerTitle: false,
-                title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
-                bottom: _tabBar(),
-              ),
+            child: AppBar(
+              elevation: 0.0,
+              backgroundColor: Colors.white.withOpacity(0.75),
+              shape: const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(32.0))),
+              centerTitle: false,
+              title: Text(DateFormat("yyyy년 M월 d일").format(DateTime.now())),
+              bottom: _tabBar(),
             ),
           ),
         ),
@@ -100,6 +93,12 @@ class _TabBarScreenState extends State<HomeView>
         child: Column(
           children: [
             TabBar(
+              onTap: (value) {
+                if (Provider.of<RoutinViewModel>(context, listen: false)
+                    .isEdit) {
+                  Provider.of<RoutinViewModel>(context, listen: false).edit();
+                }
+              },
               controller: _tabController,
               indicator: const BoxDecoration(color: Color(0xffFFC6B9)),
               labelStyle: const TextStyle(
@@ -139,24 +138,45 @@ class _TabBarScreenState extends State<HomeView>
   }
 
   Widget _edit() =>
-      Consumer<RoutinViewModel>(builder: (context, provder, child) {
-        return (provder.isEdit)
+      Consumer<RoutinViewModel>(builder: (context, provider, child) {
+        return (provider.isEdit)
             ? SizedBox(
                 height: AppBar().preferredSize.height,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(2.0),
+                    Padding(
+                      padding: const EdgeInsets.all(2.0),
                       child: Row(
-                        children: [Text("선택"), Text("전체선택")],
+                        children: [
+                          const Text(
+                            "선택",
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xff111111)),
+                          ),
+                          GestureDetector(
+                            onTap: provider.allSelect,
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.0),
+                              child: Text(
+                                "전체선택",
+                                style: TextStyle(
+                                    fontSize: 14, color: Color(0xffb9b9b9)),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     GestureDetector(
                         onTap: Provider.of<RoutinViewModel>(context).edit,
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text("취소"),
+                          child: Text(
+                            "취소",
+                            style: TextStyle(
+                                fontSize: 14, color: Color(0xffb9b9b9)),
+                          ),
                         ))
                   ],
                 ),

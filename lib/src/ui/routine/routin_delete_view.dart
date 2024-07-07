@@ -3,9 +3,14 @@ import 'package:hatin/src/model/routin.dart';
 import 'package:hatin/src/ui/routine/routin_view_model.dart';
 import 'package:provider/provider.dart';
 
-class RoutinDeleteView extends StatelessWidget {
+class RoutinDeleteView extends StatefulWidget {
   const RoutinDeleteView({super.key});
 
+  @override
+  State<RoutinDeleteView> createState() => _RoutinDeleteViewState();
+}
+
+class _RoutinDeleteViewState extends State<RoutinDeleteView> {
   @override
   Widget build(BuildContext context) {
     return Consumer<RoutinViewModel>(
@@ -28,7 +33,15 @@ class RoutinDeleteView extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Icon(Icons.check),
+                          Transform.scale(
+                            scale: 1.5,
+                            child: Checkbox(
+                                checkColor: const Color(0xffFE4F28),
+                                value: routin.isCheck,
+                                onChanged: (value) {
+                                  provider.check(value, index);
+                                }),
+                          ),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 20.0),
