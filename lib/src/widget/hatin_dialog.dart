@@ -25,18 +25,14 @@ class HatinDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-      child: Container(
-        height: 300,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _header(),
-            _content(),
-            _commitBtn(),
-            _cancelBtn(),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _header(),
+          _content(),
+          _commitBtn(),
+          _cancelBtn(),
+        ],
       ),
     );
   }
@@ -45,18 +41,15 @@ class HatinDialog extends StatelessWidget {
       ? Padding(padding: const EdgeInsets.all(20.0), child: header!)
       : Container();
 
-  Widget _content() => Expanded(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              content.length,
-              (index) => Text(
-                content[index],
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-              ),
+  Widget _content() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            content.length,
+            (index) => Text(
+              content[index],
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
           ),
         ),

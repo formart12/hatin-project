@@ -141,6 +141,7 @@ class _TabBarScreenState extends State<HomeView>
       Consumer<RoutinViewModel>(builder: (context, provider, child) {
         return (provider.isEdit)
             ? SizedBox(
+                key: const Key("RoutinSelectTool"),
                 height: AppBar().preferredSize.height,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,6 +156,7 @@ class _TabBarScreenState extends State<HomeView>
                                 fontSize: 14, color: Color(0xff111111)),
                           ),
                           GestureDetector(
+                            key: const Key("allSelectTextBtn"),
                             onTap: provider.allSelect,
                             child: const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 12.0),
