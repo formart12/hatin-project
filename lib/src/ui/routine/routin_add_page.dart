@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hatin/src/ui/routine/routine_view.dart';
 
 class RoutinAddPage extends StatefulWidget {
   const RoutinAddPage({super.key});
@@ -18,11 +15,10 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _appbar(),
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: _bottom(),
-        ));
+      appBar: _appbar(),
+      body: _body(),
+      backgroundColor: Colors.white,
+    );
   }
 
 // 앱 바 부분
@@ -62,27 +58,29 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
   }
 
 // |내용부분| "이름 입력"
-  Widget _bottom() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            _nameText(), // 이름 입력 텍스트
-            _editName(), // 이름 입력 옆에 연필 모양 수정
-          ],
-        ),
-        _routinTimeText(), // 루틴 시간
-        _routinTimeAdd(), // 루틴 시간 아래
-        _routinRepeatText(), // 루틴 반복
-        _routinRepeatSelection(), // 루틴 반복 요일 선택
+  Widget _body() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              _nameText(), // 이름 입력 텍스트
+              _editName(), // 이름 입력 옆에 연필 모양 수정
+            ],
+          ),
+          _routinTimeText(), // 루틴 시간
+          _routinTimeAdd(), // 루틴 시간 아래
+          _routinRepeatText(), // 루틴 반복
+          _routinRepeatSelection(), // 루틴 반복 요일 선택
 
-        _routinAlarmText(), // 알람
-        _routinAlarmAction(),
-        _routinMemoText(),
-        _routinMemoTyping(),
-        routinCreateButton(),
-      ],
+          _routinAlarmText(), // 알람
+          _routinAlarmAction(), // 알람 On/Off
+          _routinMemoText(), // 메모
+          _routinMemoTyping(), // 메모 타이핑 공간
+          _routinCreateButton(), // 루틴 생성 버튼
+        ],
+      ),
     );
   }
 
@@ -299,7 +297,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     );
   }
 
-  Widget routinCreateButton() {
+// 루틴 생성 버튼
+  Widget _routinCreateButton() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SizedBox(
