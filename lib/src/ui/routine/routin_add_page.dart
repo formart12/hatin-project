@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// 코드 리펙토링, 반응형
+
 class RoutinAddPage extends StatefulWidget {
-  const RoutinAddPage({super.key});
+  const RoutinAddPage({Key? key}) : super(key: key);
 
   @override
   State<RoutinAddPage> createState() => _RoutinAddPageState();
@@ -10,21 +12,31 @@ class RoutinAddPage extends StatefulWidget {
 
 class _RoutinAddPageState extends State<RoutinAddPage> {
   List<bool> _dowColor = List<bool>.filled(7, false);
-  TimeOfDay initialTime = const TimeOfDay(hour: 09, minute: 00);
   // 요일 클릭 시 색 변화를 위한 List , false = 클릭전 , true = 클릭후
+  TimeOfDay initialTime = const TimeOfDay(hour: 09, minute: 00);
+  // 현재시간 변수
   @override
   Widget build(BuildContext context) {
+    //final double screenWidth = MediaQuery.of(context).size.width; // 반응형 위한 넓이
+    //final double screenheight = MediaQuery.of(context).size.height; // 반응형 위한 높이
+    //
+    //print("스크린 넓이 {$screenWidth}"); // 392
+    //print("스크린 높이 {$screenheight}"); // 781
+
     return Scaffold(
       appBar: _appbar(),
       body: _body(),
       backgroundColor: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _routinCreateButton(), // 루틴 추가하기 버튼
     );
   }
 
 // 앱 바 부분
   PreferredSizeWidget _appbar() {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(100),
+      preferredSize: Size.fromHeight(
+          MediaQuery.of(context).size.height * 0.128), // from height :100
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -37,22 +49,19 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
               "루틴 추가하기",
               style: TextStyle(fontSize: 16),
             ),
-            actions: [_appBarCloseBtn()],
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              )
+            ],
           ),
         ],
-      ),
-    );
-  }
-
-// |앱 바| X 닫기 버튼
-  Widget _appBarCloseBtn() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: IconButton(
-        icon: const Icon(Icons.close),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
       ),
     );
   }
@@ -63,60 +72,59 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              _nameText(), // 이름 입력 텍스트
-              _editName(), // 이름 입력 옆에 연필 모양 수정
-            ],
-          ),
+          _nameField(), // 이름 입력 필드 : 이름 입력 , 수정 아이콘
           _routinTimeText(), // 루틴 시간
-          _routinTimeAdd(), // 루틴 시간 아래
+          _routinTimeAdd(), // 루틴 시간 설정
           _routinRepeatText(), // 루틴 반복
           _routinRepeatSelection(), // 루틴 반복 요일 선택
-
-          _routinAlarmText(), // 알람
-          _routinAlarmAction(), // 알람 On/Off
+          _routinAlarm(), // 알람 , 스위치 On/Off
           _routinMemoText(), // 메모
           _routinMemoTyping(), // 메모 타이핑 공간
-          _routinCreateButton(), // 루틴 생성 버튼
         ],
       ),
     );
   }
 
-// |이름 입력| 텍스트
-  Widget _nameText() {
+// |이름 입력| , 수정 아이콘
+  Widget _nameField() {
     String routinName = "이름 입력";
-    return Padding(
-      padding: const EdgeInsets.only(left: 40.0, top: 15.0),
-      child: Text(
-        routinName,
-        style: const TextStyle(fontSize: 18.0, color: Color(0xff9B9B9B)),
-      ),
-    );
-  }
-
-// |이름 입력| 옆에 연필 모양 수정하기
-  Widget _editName() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, top: 15.0),
-      child: GestureDetector(
-        onTap: () {
-          print("icons.edit이 눌려졌다!");
-        },
-        child: const Icon(
-          Icons.edit,
-          size: 31,
+    return Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.1, // left:40, top:15
+              top: MediaQuery.of(context).size.height * 0.019),
+          child: Text(
+            routinName,
+            style: const TextStyle(fontSize: 18.0, color: Color(0xff9B9B9B)),
+          ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.020, // left:8, top:15
+              top: MediaQuery.of(context).size.height * 0.019),
+          child: GestureDetector(
+            onTap: () {
+              print("icons.edit이 눌려졌다!");
+            },
+            child: const Icon(
+              Icons.edit,
+              size: 31,
+            ),
+          ),
+        )
+      ],
     );
   }
 
 // |루틴 시간| 텍스트
   Widget _routinTimeText() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 40.0, top: 40.0),
-      child: Text(
+    return Padding(
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:40
+          top: MediaQuery.of(context).size.height * 0.0512,
+          right: MediaQuery.of(context).size.width * 0.1),
+      child: const Text(
         "시간 설정",
         style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
       ),
@@ -129,8 +137,9 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Center(
         child: SizedBox(
-          width: 335,
-          height: 45,
+          width:
+              MediaQuery.of(context).size.width * 0.84, //width:335, height:45
+          height: MediaQuery.of(context).size.height * 0.0571,
           child: TextField(
             readOnly: true,
             decoration: InputDecoration(
@@ -167,9 +176,12 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |루틴 반복| 텍스트
   Widget _routinRepeatText() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 40.0, top: 30.0),
-      child: Text(
+    return Padding(
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:30
+          top: MediaQuery.of(context).size.height * 0.038,
+          right: MediaQuery.of(context).size.width * 0.1),
+      child: const Text(
         "루틴 반복",
         style: TextStyle(fontSize: 16.0),
       ),
@@ -181,7 +193,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     final List<String> DOW = ["일", "월", "화", "수", "목", "금", "토"];
     // DOW = Day Of Weak
     return Padding(
-      padding: const EdgeInsets.only(left: 40),
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.1), // left:40
       child: Row(
         children: List.generate(
           DOW.length,
@@ -189,8 +202,9 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
             padding: const EdgeInsets.symmetric(horizontal: 4.2, vertical: 5),
             child: GestureDetector(
               child: Container(
-                width: 32,
-                height: 45,
+                width: MediaQuery.of(context).size.width * 0.082, // width:32
+                height:
+                    MediaQuery.of(context).size.height * 0.0576, // height:45
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(12.0),
@@ -223,40 +237,48 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     );
   }
 
-// |알람| 텍스트
-  Widget _routinAlarmText() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 40.0, top: 30.0),
-      child: Text(
-        "알림",
-        style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
-      ),
-    );
-  }
-
-  // |알람| On/OFF
-  Widget _routinAlarmAction() {
+// |알람| , 스위치
+  Widget _routinAlarm() {
     bool switchValue = true;
-    return Padding(
-      padding: const EdgeInsets.only(left: 40.0, top: 5.0),
-      child: Transform.scale(
-        scale: 1.1,
-        child: CupertinoSwitch(
-            value: switchValue,
-            onChanged: (value) {
-              setState(() {
-                switchValue = value;
-              });
-            }),
-      ),
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.1, //left:40, top:30
+              top: MediaQuery.of(context).size.height * 0.0384),
+          child: const Text(
+            "알림",
+            style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
+          ),
+        ),
+        Padding(
+          // 알람 On/Off
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.1, //left:40, top:5
+              top: MediaQuery.of(context).size.height * 0.006402),
+          child: Transform.scale(
+            scale: 1.1,
+            child: CupertinoSwitch(
+                // 스위치
+                value: switchValue,
+                onChanged: (value) {
+                  setState(() {
+                    switchValue = value;
+                  });
+                }),
+          ),
+        )
+      ],
     );
   }
 
 // |메모| 텍스트
   Widget _routinMemoText() {
-    return const Padding(
-      padding: EdgeInsets.only(left: 40.0, top: 25.0),
-      child: Text(
+    return Padding(
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:25
+          top: MediaQuery.of(context).size.height * 0.03201),
+      child: const Text(
         "메모",
         style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
       ),
@@ -271,11 +293,14 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       },
       child: Padding(
         //
-        padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.051, //left:20, top:10
+            top: MediaQuery.of(context).size.height * 0.0128,
+            right: MediaQuery.of(context).size.width * 0.051),
         child: Center(
           child: SizedBox(
-            width: 335,
-            height: 57,
+            width: MediaQuery.of(context).size.width * 0.854, //width335
+            height: 150, // 150 으로 설정해야 스크롤을 내려서 메모 내용을 볼 수 있음.
             child: TextField(
               maxLines: null,
               decoration: InputDecoration(
@@ -302,19 +327,17 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SizedBox(
-        width: double.infinity,
-        height: 50,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffFe4F28),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(36)),
-                fixedSize: Size(355, 56)),
+        width: MediaQuery.of(context).size.width * 0.905, //width:355, height:56
+        height: MediaQuery.of(context).size.height * 0.064020,
+        child: FloatingActionButton.extended(
+            backgroundColor: Color(0xffFe4F28),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             onPressed: () {
               Navigator.of(context).pop();
               //print("루틴 생성 버튼 클릭");
             },
-            child: const Text(
+            label: const Text(
               "루틴 생성",
               style: TextStyle(color: Color(0xffFFFFFF), fontSize: 16),
             )),
