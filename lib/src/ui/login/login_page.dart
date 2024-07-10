@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -22,8 +23,12 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             _text(),
-            _loginid(),
-            _loginpassword(),
+            _textid(),
+            _userid(),
+            _findid(),
+            _textpassword(),
+            _userpassword(),
+            _findpassword(),
             _btnlogin(),
             _btnsignup(),
           ],
@@ -48,111 +53,118 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _loginid() {
-    return Column(
+  Widget _textid() {
+    return const SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          "아이디",
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
+  Widget _userid() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xffF1F3F5),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: TextField(
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: "아이디를 입력해주세요.",
+              hintStyle: TextStyle(
+                color: Color(0xff9B9B9B),
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget _findid() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "아이디",
-                style: TextStyle(fontSize: 16),
-              ),
-            )),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xffF1F3F5),
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "아이디를 입력해주세요.",
-                  hintStyle: TextStyle(
-                    color: Color(0xff9B9B9B),
-                  )),
-            ),
+        const Text(
+          "아이디 기억하기",
+          style: TextStyle(
+            color: Color(0xff9B9B9B),
+            fontSize: 16,
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Text(
-              "아이디 기억하기",
-              style: TextStyle(
-                color: Color(0xff9B9B9B),
-                fontSize: 16,
-              ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "아이디 찾기",
+            style: TextStyle(
+              color: Color(0xff9B9B9B),
+              fontSize: 16,
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                "아이디 찾기",
-                style: TextStyle(
-                  color: Color(0xff9B9B9B),
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
   }
 
-  Widget _loginpassword() {
-    return Column(
+  Widget _textpassword() {
+    return const SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text(
+          "비밀번호",
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
+  Widget _userpassword() {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xffF1F3F5),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: "비밀번호를 입력해주세요.",
+              hintStyle: TextStyle(
+                color: Color(0xff9B9B9B),
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget _findpassword() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "비밀번호",
-                style: TextStyle(fontSize: 16),
-              ),
-            )),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xffF1F3F5),
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "비밀번호를 입력해주세요.",
-                hintStyle: TextStyle(
-                  color: Color(0xff9B9B9B),
-                ),
-              ),
-            ),
+        const Text(
+          "비밀번호를 잊으셨나요?",
+          style: TextStyle(
+            color: Color(0xff9B9B9B),
+            fontSize: 16,
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Text(
-              "비밀번호를 잊으셨나요? ",
-              style: TextStyle(
-                color: Color(0xff9B9B9B),
-                fontSize: 16,
-              ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            "비밀번호 찾기",
+            style: TextStyle(
+              color: Color(0xff9B9B9B),
+              fontSize: 16,
             ),
-            TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "비밀번호 찾기",
-                  style: TextStyle(
-                    color: Color(0xff9B9B9B),
-                    fontSize: 16,
-                  ),
-                )),
-          ],
+          ),
         ),
       ],
     );
