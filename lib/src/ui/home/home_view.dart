@@ -93,6 +93,7 @@ class _TabBarScreenState extends State<HomeView>
         child: Column(
           children: [
             TabBar(
+              labelPadding: EdgeInsets.zero,
               onTap: (value) {
                 if (Provider.of<RoutinViewModel>(context, listen: false)
                     .isEdit) {
