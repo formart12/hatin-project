@@ -12,6 +12,7 @@ class OnboardView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _logo(),
             _discription(),
@@ -25,17 +26,10 @@ class OnboardView extends StatelessWidget {
   /// 로그인 화면 상단
   /// 아이콘들
   Widget _logo() => Flexible(
-        flex: 5,
+        flex: 7,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              Container(
-                color: Colors.black,
-              )
-            ],
-          ),
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: HattinImageIcon(path: ImagePath.onboardLogo)),
       );
 
   /// 앱 중단 설명 부분

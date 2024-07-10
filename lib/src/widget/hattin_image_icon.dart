@@ -24,4 +24,5 @@ class ImagePath {
   static String get feedOff => "asset/image/bottom_nav_feed_off.png";
   static String get mypageOn => "asset/image/bottom_nav_mypage_on.png";
   static String get mypageOff => "asset/image/bottom_nav_mypage_off.png";
+  static String get onboardLogo => "asset/image/onboard_logo.png";
 }
