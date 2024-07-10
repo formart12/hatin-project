@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           "/login": (context) => const LoginView(),
           "/routinAddPage": (context) => const RoutinAddPage(),
         },
-        initialRoute: "/login",
+        initialRoute: "/",
       ),
     );
   }
