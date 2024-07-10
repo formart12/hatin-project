@@ -66,8 +66,6 @@ class RoutinViewModel extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (context) => HatinDialog(
-              showHeader: true,
-              header: const CircleAvatar(),
               content: const ["루틴의 모든 기록이", "영구적으로 삭제됩니다.", "", "정말 삭제하시겠습니까?"],
               commitLabel: "삭제",
               onCommit: () {},

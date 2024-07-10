@@ -115,7 +115,7 @@ class _TabBarScreenState extends State<HomeView>
                               child: Text(
                                 _weekDay[index],
                                 style: const TextStyle(
-                                    fontSize: 12, fontWeight: FontWeight.w400),
+                                    fontSize: 15, fontWeight: FontWeight.w400),
                               ),
                             ),
                             Padding(
@@ -123,7 +123,7 @@ class _TabBarScreenState extends State<HomeView>
                               child: Text(
                                 (startOfWeek + index).toString(),
                                 style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400),
+                                    fontSize: 13, fontWeight: FontWeight.w400),
                               ),
                             )
                           ],

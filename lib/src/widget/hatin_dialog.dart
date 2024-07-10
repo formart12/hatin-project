@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hatin/src/widget/hattin_image_icon.dart';
 
 class HatinDialog extends StatelessWidget {
-  final Widget? header;
-  final bool showHeader;
   final List<String> content;
   final String commitLabel;
   final void Function()? onCommit;
@@ -10,16 +9,12 @@ class HatinDialog extends StatelessWidget {
   final void Function()? onCancel;
   const HatinDialog(
       {super.key,
-      this.header,
-      this.showHeader = false,
       this.commitLabel = "확인",
       this.cancelLabel = "취소",
       required this.content,
       this.onCommit,
       this.onCancel})
-      : assert(!showHeader || header != null,
-            "헤더 영역을 표시하려면 헤더 위젯이 필요합니다. 헤더 위젯을 지정해주세요."),
-        assert(onCommit != null && onCancel != null, "반드시 확인, 취소 액션을 지정해야합니다");
+      : assert(onCommit != null && onCancel != null, "반드시 확인, 취소 액션을 지정해야합니다");
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +32,10 @@ class HatinDialog extends StatelessWidget {
     );
   }
 
-  Widget _header() => (header != null)
-      ? Padding(padding: const EdgeInsets.all(20.0), child: header!)
-      : Container();
+  Widget _header() => Padding(
+        padding: const EdgeInsets.only(top: 24),
+        child: HattinImageIcon(path: ImagePath.dialog),
+      );
 
   Widget _content() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
