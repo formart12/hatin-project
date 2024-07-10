@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -6,41 +7,42 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+      ),
       body: _body(),
     );
   }
 
   Widget _body() {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _text(),
-          _loginid(),
-          _loginpassword(),
-          _btnlogin(),
-          _btnsignup(),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            _text(),
+            _loginid(),
+            _loginpassword(),
+            _btnlogin(),
+            _btnsignup(),
+          ],
+        ),
       ),
     );
   }
 
   Widget _text() {
-    return const SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            Icon(
-              Icons.circle,
-              color: Color(0xffE5E5E5),
-            ),
-            Text(
-              "로그인",
-              textAlign: TextAlign.left,
-            ),
-          ],
+    return Container(
+      alignment: Alignment.centerLeft,
+      width: double.infinity,
+      height: 100,
+      child: const Text(
+        "로그인",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 24,
+          color: Color(0xff111111),
         ),
       ),
     );
@@ -49,23 +51,54 @@ class LoginPage extends StatelessWidget {
   Widget _loginid() {
     return Column(
       children: [
-        const SizedBox(width: double.infinity, child: Text("아이디")),
+        const SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "아이디",
+                style: TextStyle(fontSize: 16),
+              ),
+            )),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xffE5E5E5),
+            color: const Color(0xffF1F3F5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
               decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "아이디를 입력해주세요.",
-              ),
+                  border: InputBorder.none,
+                  hintText: "아이디를 입력해주세요.",
+                  hintStyle: TextStyle(
+                    color: Color(0xff9B9B9B),
+                  )),
             ),
           ),
         ),
-        TextButton(onPressed: () {}, child: const Text("아이디를 잊으셨나요?")),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Text(
+              "아이디 기억하기",
+              style: TextStyle(
+                color: Color(0xff9B9B9B),
+                fontSize: 16,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text(
+                "아이디 찾기",
+                style: TextStyle(
+                  color: Color(0xff9B9B9B),
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -73,10 +106,18 @@ class LoginPage extends StatelessWidget {
   Widget _loginpassword() {
     return Column(
       children: [
-        const SizedBox(width: double.infinity, child: Text("비밀번호")),
+        const SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "비밀번호",
+                style: TextStyle(fontSize: 16),
+              ),
+            )),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xffE5E5E5),
+            color: const Color(0xffF1F3F5),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: const Padding(
@@ -85,23 +126,47 @@ class LoginPage extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "비밀번호를 입력해주세요.",
+                hintStyle: TextStyle(
+                  color: Color(0xff9B9B9B),
+                ),
               ),
             ),
           ),
         ),
-        TextButton(onPressed: () {}, child: const Text("비밀번호를 잊으셨나요?")),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Text(
+              "비밀번호를 잊으셨나요? ",
+              style: TextStyle(
+                color: Color(0xff9B9B9B),
+                fontSize: 16,
+              ),
+            ),
+            TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "비밀번호 찾기",
+                  style: TextStyle(
+                    color: Color(0xff9B9B9B),
+                    fontSize: 16,
+                  ),
+                )),
+          ],
+        ),
       ],
     );
   }
 
-  Widget _btnlogin() => SafeArea(
+  Widget _btnlogin() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            print("눌림");
+          },
           child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 22.0),
             width: double.infinity,
-            height: 70,
+            height: 56,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                   colors: [Color(0xffFF3D3D), Color(0xffFF7354)]),
@@ -113,7 +178,7 @@ class LoginPage extends StatelessWidget {
                 Text(
                   "로그인하기",
                   style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
                 ),
@@ -124,15 +189,24 @@ class LoginPage extends StatelessWidget {
       );
 
   Widget _btnsignup() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const Text("아이디가 없으신가요?"),
-        TextButton(
-          onPressed: () {},
-          child: const Text("회원가입"),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Text(
+            "아이디가 없으신가요?",
+            style: TextStyle(fontSize: 16, color: Color(0xff9B9B9B)),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              "회원가입",
+              style: TextStyle(fontSize: 16, color: Color(0xff9b9b9b)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
