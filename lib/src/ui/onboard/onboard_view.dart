@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hatin/src/widget/gradient_button.dart';
 import 'package:hatin/src/widget/custom_outlined_button.dart';
+import 'package:hatin/src/widget/hattin_image_icon.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class OnboardView extends StatelessWidget {
+  const OnboardView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +49,7 @@ class LoginView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 1.0),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      color: Colors.black,
-                    ),
+                    child: HattinImageIcon(path: ImagePath.logo),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 1.0),
