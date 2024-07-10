@@ -11,6 +11,7 @@ class CustomOutlinedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
+      highlightColor: Colors.white.withOpacity(0.5),
       borderRadius: BorderRadius.circular(36.0),
       child: Ink(
         height: 56,

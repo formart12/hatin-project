@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hatin/src/widget/gradient_button.dart';
-import 'package:hatin/src/widget/outlined_button.dart';
+import 'package:hatin/src/widget/custom_outlined_button.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -9,6 +9,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
