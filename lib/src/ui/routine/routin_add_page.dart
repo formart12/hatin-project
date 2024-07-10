@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 // 코드 리펙토링, 반응형
 
 class RoutinAddPage extends StatefulWidget {
-  const RoutinAddPage({Key? key}) : super(key: key);
-
+  const RoutinAddPage({super.key});
   @override
   State<RoutinAddPage> createState() => _RoutinAddPageState();
 }
@@ -24,45 +23,32 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     //print("스크린 높이 {$screenheight}"); // 781
 
     return Scaffold(
-      appBar: _appbar(),
+      appBar: AppBar(
+        // 앱바 , 앱바 옆에 X
+        elevation: 0.0,
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        title: const Text(
+          "루틴 추가하기",
+          style: TextStyle(fontSize: 16),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          )
+        ],
+      ),
       body: _body(),
       backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: _routinCreateButton(), // 루틴 추가하기 버튼
-    );
-  }
-
-// 앱 바 부분
-  PreferredSizeWidget _appbar() {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(
-          MediaQuery.of(context).size.height * 0.128), // from height :100
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppBar(
-            elevation: 0.0,
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            automaticallyImplyLeading: false,
-            title: const Text(
-              "루틴 추가하기",
-              style: TextStyle(fontSize: 16),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
     );
   }
 
@@ -92,8 +78,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       children: [
         Padding(
           padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1, // left:40, top:15
-              top: MediaQuery.of(context).size.height * 0.019),
+              left: 40, // left:40, top:15
+              top: 40),
           child: Text(
             routinName,
             style: const TextStyle(fontSize: 18.0, color: Color(0xff9B9B9B)),
@@ -119,12 +105,12 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |루틴 시간| 텍스트
   Widget _routinTimeText() {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:40
-          top: MediaQuery.of(context).size.height * 0.0512,
-          right: MediaQuery.of(context).size.width * 0.1),
-      child: const Text(
+          left: 40, //left:40, top:40
+          top: 20,
+          right: 40),
+      child: Text(
         "시간 설정",
         style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
       ),
@@ -137,9 +123,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Center(
         child: SizedBox(
-          width:
-              MediaQuery.of(context).size.width * 0.84, //width:335, height:45
-          height: MediaQuery.of(context).size.height * 0.0571,
+          width: 335, //width:335, height:45
+          height: 45,
           child: TextField(
             readOnly: true,
             decoration: InputDecoration(
@@ -176,11 +161,10 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |루틴 반복| 텍스트
   Widget _routinRepeatText() {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:30
-          top: MediaQuery.of(context).size.height * 0.038,
-          right: MediaQuery.of(context).size.width * 0.1),
+          left: 40, //left:40, top:30
+          top: 30),
       child: const Text(
         "루틴 반복",
         style: TextStyle(fontSize: 16.0),
@@ -193,8 +177,7 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     final List<String> DOW = ["일", "월", "화", "수", "목", "금", "토"];
     // DOW = Day Of Weak
     return Padding(
-      padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.1), // left:40
+      padding: const EdgeInsets.only(left: 40), // left:40
       child: Row(
         children: List.generate(
           DOW.length,
@@ -202,9 +185,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
             padding: const EdgeInsets.symmetric(horizontal: 4.2, vertical: 5),
             child: GestureDetector(
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.082, // width:32
-                height:
-                    MediaQuery.of(context).size.height * 0.0576, // height:45
+                width: 32,
+                height: 45,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(12.0),
@@ -239,13 +221,13 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |알람| , 스위치
   Widget _routinAlarm() {
-    bool switchValue = true;
+    bool _switchValue = true;
     return Column(
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1, //left:40, top:30
-              top: MediaQuery.of(context).size.height * 0.0384),
+              left: 30, //left:40, top:30
+              top: 30),
           child: const Text(
             "알림",
             style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
@@ -253,19 +235,20 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
         ),
         Padding(
           // 알람 On/Off
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.1, //left:40, top:5
-              top: MediaQuery.of(context).size.height * 0.006402),
+          padding: const EdgeInsets.only(
+              left: 40, //left:40, top:5
+              top: 5),
           child: Transform.scale(
             scale: 1.1,
             child: CupertinoSwitch(
                 // 스위치
-                value: switchValue,
-                onChanged: (value) {
+                value: _switchValue,
+                onChanged: (bool value) {
                   setState(() {
-                    switchValue = value;
+                    _switchValue = value;
                   });
-                }),
+                },
+                activeColor: Color(0xffFE4F28)),
           ),
         )
       ],
@@ -274,10 +257,10 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
 
 // |메모| 텍스트
   Widget _routinMemoText() {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width * 0.1, //left:40, top:25
-          top: MediaQuery.of(context).size.height * 0.03201),
+          left: 40, //left:40, top:25
+          top: 25),
       child: const Text(
         "메모",
         style: TextStyle(fontSize: 16.0, color: Color(0xff111111)),
@@ -293,14 +276,14 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
       },
       child: Padding(
         //
-        padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width * 0.051, //left:20, top:10
-            top: MediaQuery.of(context).size.height * 0.0128,
-            right: MediaQuery.of(context).size.width * 0.051),
+        padding: const EdgeInsets.only(
+            left: 20, //left:20, top:10
+            top: 10,
+            right: 20),
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.854, //width335
-            height: 150, // 150 으로 설정해야 스크롤을 내려서 메모 내용을 볼 수 있음.
+            height: 200, // 150 으로 설정해야 스크롤을 내려서 메모 내용을 볼 수 있음.
             child: TextField(
               maxLines: null,
               decoration: InputDecoration(
@@ -327,8 +310,8 @@ class _RoutinAddPageState extends State<RoutinAddPage> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.905, //width:355, height:56
-        height: MediaQuery.of(context).size.height * 0.064020,
+        width: 335, //width:355, height:56
+        height: 56,
         child: FloatingActionButton.extended(
             backgroundColor: Color(0xffFe4F28),
             shape:
