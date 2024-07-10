@@ -16,4 +16,12 @@ class HattinImageIcon extends StatelessWidget {
 class ImagePath {
   static String get logo => "asset/image/hattin_logo.png";
   static String get dialog => "asset/image/dialog_icon.png";
+  static String get homeOn => "asset/image/bottom_nav_home_on.png";
+  static String get homeOff => "asset/image/bottom_nav_home_off.png";
+  static String get routinOn => "asset/image/bottom_nav_routin_on.png";
+  static String get routinOff => "asset/image/bottom_nav_routin_off.png";
+  static String get feedOn => "asset/image/bottom_nav_feed_on.png";
+  static String get feedOff => "asset/image/bottom_nav_feed_off.png";
+  static String get mypageOn => "asset/image/bottom_nav_mypage_on.png";
+  static String get mypageOff => "asset/image/bottom_nav_mypage_off.png";
 }

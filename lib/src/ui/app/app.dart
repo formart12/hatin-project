@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hatin/src/ui/app/app_view_model.dart';
 import 'package:hatin/src/ui/home/home_view.dart';
 import 'package:hatin/src/ui/routine/routin_view_model.dart';
+import 'package:hatin/src/widget/hattin_image_icon.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
@@ -56,15 +57,23 @@ class _AppState extends State<App> {
                     showSelectedLabels: false,
                     showUnselectedLabels: false,
                     type: BottomNavigationBarType.fixed,
-                    items: const [
+                    items: [
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "Home"),
+                          icon: HattinImageIcon(path: ImagePath.homeOff),
+                          activeIcon: HattinImageIcon(path: ImagePath.homeOn),
+                          label: "Home"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "Rotin"),
+                          icon: HattinImageIcon(path: ImagePath.routinOff),
+                          activeIcon: HattinImageIcon(path: ImagePath.routinOn),
+                          label: "Rotin"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "Feed"),
+                          icon: HattinImageIcon(path: ImagePath.feedOff),
+                          activeIcon: HattinImageIcon(path: ImagePath.feedOn),
+                          label: "Feed"),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.home), label: "MyPage"),
+                          icon: HattinImageIcon(path: ImagePath.mypageOff),
+                          activeIcon: HattinImageIcon(path: ImagePath.mypageOn),
+                          label: "MyPage"),
                     ]),
               );
             })
