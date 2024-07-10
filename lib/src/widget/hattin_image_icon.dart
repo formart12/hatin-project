@@ -15,4 +15,5 @@ class HattinImageIcon extends StatelessWidget {
 
 class ImagePath {
   static String get logo => "asset/image/hattin_logo.png";
+  static String get dialog => "asset/image/dialog_icon.png";
 }

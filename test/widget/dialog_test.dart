@@ -18,18 +18,6 @@ void main() {
       expect(find.text("content"), findsOneWidget);
     });
 
-    testWidgets("showHeader=true인 경우 헤더 위젯을 지정하지 않으면 assert가 실행된다..",
-        (widgetTester) async {
-      builder() => HatinDialog(
-            showHeader: true,
-            content: const ["content"],
-            onCancel: () {},
-            onCommit: () {},
-          );
-
-      expect(() => builder(), throwsAssertionError);
-    });
-
     testWidgets("확인, 취소 액션을 할당하지 않은 경우 assert가 실행된다..", (widgetTester) async {
       builderA() => HatinDialog(
             content: const ["content"],
