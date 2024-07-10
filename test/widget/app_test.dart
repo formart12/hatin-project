@@ -7,6 +7,7 @@ import 'package:hatin/src/ui/app/app_view_model.dart';
 import 'package:hatin/src/ui/home/home_view.dart';
 import 'package:hatin/src/ui/routine/routin_view_model.dart';
 import 'package:hatin/src/widget/hatin_dialog.dart';
+import 'package:hatin/src/widget/hattin_image_icon.dart';
 import 'package:provider/provider.dart';
 
 Widget _createApp() => MultiProvider(
@@ -35,7 +36,7 @@ void main() {
       await testWidget.pumpWidget(_createApp());
       await testWidget.pumpAndSettle(const Duration(seconds: 1));
       expect(find.byType(BottomNavigationBar), findsOneWidget);
-      expect(find.byIcon(Icons.home), findsAtLeast(4));
+      expect(find.byType(HattinImageIcon), findsAtLeast(4));
     });
 
     testWidgets("앱 전체편집 테스트", (testWidget) async {
