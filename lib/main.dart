@@ -3,7 +3,7 @@ import 'package:hatin/src/repository/routin_repository.dart';
 import 'package:hatin/src/service/routin_service.dart';
 import 'package:hatin/src/ui/app/app.dart';
 import 'package:hatin/src/ui/app/app_view_model.dart';
-import 'package:hatin/src/ui/login/login_view.dart';
+import 'package:hatin/src/ui/onboard/onboard_view.dart';
 import 'package:hatin/src/ui/routine/routin_add_page.dart';
 import 'package:hatin/src/ui/routine/routin_view_model.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                 selectedItemColor: Color(0xffFE4F28))),
         routes: {
           "/": (context) => const App(),
-          "/login": (context) => const LoginView(),
+          "/onboard": (context) => const OnboardView(),
           "/routinAddPage": (context) => const RoutinAddPage(),
         },
         initialRoute: "/",
