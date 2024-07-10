@@ -105,7 +105,7 @@ class LoginView extends StatelessWidget {
   Widget _buttons() => Flexible(
         flex: 3,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
           child: Column(
             children: [
               Padding(
