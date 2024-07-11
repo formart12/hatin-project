@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                 unselectedItemColor: Color(0xffd9d9d9),
                 selectedItemColor: Color(0xffFE4F28))),
         routes: {
-          "/": (context) => const App(),
+          "/": (context) => const LoginPage(),
           "/onboard": (context) => const LoginPage(),
           "/routinAddPage": (context) => const RoutinAddPage(),
         },

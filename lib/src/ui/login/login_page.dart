@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hatin/src/widget/gradient_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -10,6 +11,10 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.chevron_left),
+        ),
         elevation: 0,
       ),
       body: _body(),
@@ -23,13 +28,17 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             _text(),
-            _textid(),
-            _userid(),
+            _inputField("아이디", "아이디를 입력해주세요.", false),
             _findid(),
-            _textpassword(),
-            _userpassword(),
+            _inputField("비밀번호", "비밀번호를 입력해주세요.", true),
             _findpassword(),
-            _btnlogin(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50),
+              child: GradientButton(
+                label: "로그인하기",
+                onPressed: () {},
+              ),
+            ),
             _btnsignup(),
           ],
         ),
@@ -53,36 +62,37 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _textid() {
-    return const SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text(
-          "아이디",
-          style: TextStyle(fontSize: 16),
+  Widget _inputField(String label, String hintText, bool isPassword) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget _userid() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffF1F3F5),
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: TextField(
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: "아이디를 입력해주세요.",
-              hintStyle: TextStyle(
-                color: Color(0xff9B9B9B),
-              )),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xffF1F3F5),
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: TextField(
+              obscureText: isPassword,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: hintText,
+                hintStyle: const TextStyle(
+                  color: Color(0xff9B9B9B),
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -111,40 +121,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _textpassword() {
-    return const SizedBox(
-      width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text(
-          "비밀번호",
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-    );
-  }
-
-  Widget _userpassword() {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xffF1F3F5),
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: TextField(
-          obscureText: true,
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: "비밀번호를 입력해주세요.",
-              hintStyle: TextStyle(
-                color: Color(0xff9B9B9B),
-              )),
-        ),
-      ),
-    );
-  }
-
   Widget _findpassword() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -169,36 +145,6 @@ class LoginPage extends StatelessWidget {
       ],
     );
   }
-
-  Widget _btnlogin() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: GestureDetector(
-          onTap: () {
-            print("눌림");
-          },
-          child: Container(
-            width: double.infinity,
-            height: 56,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                  colors: [Color(0xffFF3D3D), Color(0xffFF7354)]),
-              borderRadius: BorderRadius.circular(50.0),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "로그인하기",
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
 
   Widget _btnsignup() {
     return Padding(
