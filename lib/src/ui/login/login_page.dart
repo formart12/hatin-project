@@ -27,10 +27,10 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             _text(),
-            const UserInfo(
+            const UserTextField(
                 label: "아이디", hintText: "아이디를 입력해주세요.", isPassword: false),
             _findid(),
-            const UserInfo(
+            const UserTextField(
                 label: "비밀번호", hintText: "비밀번호를 입력해주세요.", isPassword: true),
             _findpassword(),
             Padding(
@@ -136,12 +136,12 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class UserInfo extends StatelessWidget {
+class UserTextField extends StatelessWidget {
   final String label;
   final String hintText;
   final bool isPassword;
 
-  const UserInfo({
+  const UserTextField({
     super.key,
     required this.label,
     required this.hintText,
