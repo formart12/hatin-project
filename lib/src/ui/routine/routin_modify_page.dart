@@ -304,7 +304,7 @@ class _RoutinAddPageState extends State<RoutinModifyPage> {
               print("클릭");
             },
             child: const Text(
-              "루틴 생성",
+              "루틴 수정",
             )),
       ),
     );
