@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hatin/src/ui/my_page/change_user_info.dart';
 import 'package:hatin/src/widget/service_button.dart';
 import 'package:hatin/src/widget/service_switch_button.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
   const MyPage({super.key});
 
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,21 +58,31 @@ class MyPage extends StatelessWidget {
       width: double.infinity,
       height: 70,
       color: Colors.white,
-      child: const Column(
+      child: Column(
         children: [
           Row(
             children: [
-              Text(
+              const Text(
                 "바른생활김덕인",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 24,
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 24,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ChangeUserInfo(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
-          Align(
+          const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "induk@gmail.com",
