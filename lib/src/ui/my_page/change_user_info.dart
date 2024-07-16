@@ -48,7 +48,10 @@ class _ChangeUserInfoState extends State<ChangeUserInfo> {
         children: [
           UserTextFieldButton(
               label: "닉네임 변경", buttonTitle: "변경 ", onButtonPressed: () {}),
-          const ServiceButton(label: "회원정보 변경"),
+          const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: ServiceButton(label: "회원정보 변경"),
+          ),
           const ServiceButton(label: "비밀번호 변경"),
         ],
       ),
@@ -66,7 +69,10 @@ class _ChangeUserInfoState extends State<ChangeUserInfo> {
           alignment: Alignment.centerLeft,
           child: Text(
             "계정 삭제",
-            style: TextStyle(fontSize: 16), // 선택적으로 스타일 추가
+            style: TextStyle(
+                fontSize: 16,
+                color: Color(0xff9B9B9B),
+                decoration: TextDecoration.underline),
           ),
         ),
       ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class UserTextFieldButton extends StatelessWidget {
   final String label;
   final String buttonTitle;
-  final VoidCallback onButtonPressed; // 버튼이 눌렸을 때 호출될 콜백
+  final VoidCallback onButtonPressed;
 
   const UserTextFieldButton({
     super.key,
