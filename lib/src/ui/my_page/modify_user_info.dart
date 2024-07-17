@@ -3,6 +3,7 @@ import 'package:hatin/src/ui/my_page/change_password.dart';
 import 'package:hatin/src/ui/my_page/change_user_info.dart';
 import 'package:hatin/src/widget/service_button.dart';
 import 'package:hatin/src/widget/user_text_field_button.dart';
+import 'package:hatin/src/widget/hatin_dialog.dart'; // HatinDialog 임포트
 
 class ModifyUserInfo extends StatefulWidget {
   const ModifyUserInfo({super.key});
@@ -84,7 +85,9 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
       width: double.infinity,
       height: 200,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          _showDeleteAccountDialog();
+        },
         child: const Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -96,6 +99,31 @@ class _ModifyUserInfoState extends State<ModifyUserInfo> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showDeleteAccountDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return HatinDialog(
+          commitLabel: "네, 삭제할게요.",
+          cancelLabel: "다시 생각해볼게요.",
+          content: const [
+            "모든 기록을 지우고",
+            "계정을 삭제하시겠습니까?",
+            "",
+            "계정은 영구적으로 복원되지 않습니다."
+          ],
+          onCommit: () {
+            Navigator.of(context).pop();
+            // 계정 삭제 로직 추가
+          },
+          onCancel: () {
+            Navigator.of(context).pop();
+          },
+        );
+      },
     );
   }
 }
