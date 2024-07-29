@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hatin/src/ui/login/find_email.dart';
 import 'package:hatin/src/ui/login/find_password.dart';
 import 'package:hatin/src/ui/login/login_signup_page1.dart';
+import 'package:hatin/src/widget/check_info_text_field.dart';
 import 'package:hatin/src/widget/gradient_button.dart';
 import 'package:hatin/src/widget/hattin_image_icon.dart';
-import 'package:hatin/src/widget/user_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,6 +14,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _emailHasError = false;
+  bool _passwordHasError = false;
+  bool _rememberMe = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _handleLogin() {
+    setState(() {
+      _emailHasError = _emailController.text.isEmpty;
+      _passwordHasError = _passwordController.text.isEmpty;
+
+      // Handle login logic if there are no errors
+      if (!_emailHasError && !_passwordHasError) {
+        // Perform login operation
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,34 +45,71 @@ class _LoginPageState extends State<LoginPage> {
         ),
         elevation: 0,
       ),
-      body: _body(),
-    );
-  }
-
-  Widget _body() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            _text(),
-            _centerImage(),
-            const UserTextField(
-                label: "이메일",
-                hintText: "예) Hatin@hain.co.kr",
-                isPassword: false),
-            const UserTextField(
-                label: "비밀번호", hintText: "비밀번호를 입력해주세요.", isPassword: true),
-            _findpassword(),
-            Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: GradientButton(
-                label: "로그인하기",
-                onPressed: () {},
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  _text(),
+                  _centerImage(),
+                  CheckInfoTextField(
+                    label: "이메일",
+                    hintText: "이메일을 입력해주세요",
+                    isPassword: false,
+                    hasError: _emailHasError,
+                    errorMessage: _emailHasError ? '이메일을 입력하세요' : '',
+                    onChanged: (text) {
+                      setState(() {
+                        _emailHasError = text.isEmpty;
+                      });
+                    },
+                  ),
+                  CheckInfoTextField(
+                    label: "비밀번호",
+                    hintText: "비밀번호를 입력해주세요",
+                    isPassword: true,
+                    hasError: _passwordHasError,
+                    errorMessage: _passwordHasError ? '비밀번호를 입력하세요' : '',
+                    showPasswordToggle: true,
+                    onChanged: (text) {
+                      setState(() {
+                        _passwordHasError = text.isEmpty;
+                      });
+                    },
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _rememberMe,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _rememberMe = value ?? false;
+                          });
+                        },
+                        checkColor: const Color(0xffFE4F28),
+                        activeColor: const Color(0xffF1F3F5),
+                      ),
+                      const Text(
+                        '내 정보 기억하기',
+                        style:
+                            TextStyle(fontSize: 16, color: Color(0xff9B9B9B)),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50),
+                    child: GradientButton(
+                      label: "로그인하기",
+                      onPressed: _handleLogin,
+                    ),
+                  ),
+                  btnSignup(),
+                ],
               ),
-            ),
-            btnSignup(),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -103,31 +158,6 @@ class _LoginPageState extends State<LoginPage> {
           child: HattinImageIcon(path: ImagePath.signupCenter),
         ),
       ),
-    );
-  }
-
-  Widget _findpassword() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const Text(
-          "비밀번호를 잊으셨나요?",
-          style: TextStyle(
-            color: Color(0xff9B9B9B),
-            fontSize: 16,
-          ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            "비밀번호 찾기",
-            style: TextStyle(
-              color: Color(0xff9B9B9B),
-              fontSize: 16,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
